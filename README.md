@@ -5,10 +5,12 @@ A plugin for Strapi CMS that adds select field to find a page and populate Title
 **Issue**
 * For e.g. you have Link component that has title / url fields.
 * Each time you create / update Link you need to fill in title / url fields by hand.  
+
 **What to do?**
 * Install this plugin to your Strapi project (See [here](#installation))
 * Enable and configure this plugin in your Strapi project ```./config/plugins.(js|ts)``` file (See [here](#configuration))
 * Add this plugin custom field to your Link schema in Strapi admin panel.  
+
 **Result**
 * Now you can use this plugin select field to find desired page, select it and populate title / url fields by selected page data.
 
