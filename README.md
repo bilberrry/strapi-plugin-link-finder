@@ -4,8 +4,8 @@ A plugin for Strapi CMS that adds select field to find a page and populate Title
 
 * For e.g. you have Link component that has title / url fields.
 * Each time you create / update Link you need to fill in title / url fields by hand.
-* Add this **custom field** to your Link schema.
-* In result, you can use this **custom field** to find desired page, select it and populate title / url fields by selected page data.
+* Add this plugin custom field to your Link schema.
+* In result, you can use this plugin select field to find desired page, select it and populate title / url fields by selected page data.
 
 ## Installation
 
@@ -17,15 +17,15 @@ Don't forget to **restart or rebuild** your Strapi app when installing a new plu
 
 ## Configuration
 
-| property                  | type   | description                                                                                                                                      |
-|---------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------------------|
-| contentTypes              | array  | An array of objects describing which content types should use to get page list for **select field** options.                                     |
-| contentTypes[].uid        | string | The `uid` value of content type.                                                                                                                 |
-| contentTypes[].titleField | string | Content type **title** field name: 1) used for filtering get page list query 2) returned in resulted get page list for **select field** options. |
-| contentTypes[].urlField   | string | Content type **url** field name: 1) used for filtering get page list query 2) returned in resulted get page list for **select field** options.   |
-| form                      | object | Object describing form (component) where this select field is added to populate adjacent title / url fields.                                     |
-| form.titleField           | object | Form (component) **title** field name to populate.                                                                                               |
-| form.urlField             | object | Form (component) **url** field name to populate.                                                                                                 |
+| property                  | type   | description                                                                                                  |
+|---------------------------|--------|--------------------------------------------------------------------------------------------------------------|
+| contentTypes              | array  | An array of objects describing which content types should be used to get page list.                          |
+| contentTypes[].uid        | string | The `uid` value of content type.                                                                             |
+| contentTypes[].titleField | string | Content type title field name: - used for filtering page list query; - returned in page list.                |
+| contentTypes[].urlField   | string | Content type url field name: -used for filtering page list query; - returned in page list.                   |
+| form                      | object | Object describing form (component) where this select field is added to populate adjacent title / url fields. |
+| form.titleField           | string | Form (component) title field name to populate.                                                               |
+| form.urlField             | string | Form (component) url field name to populate.                                                                 |
 
 #### Example
 
