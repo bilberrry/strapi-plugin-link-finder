@@ -77,7 +77,7 @@
     "lint:fix": "yarn lint --fix"
   },
   "publishConfig": {
-    "access": "public"
+    "registry": "https://npm.pkg.github.com/"
   },
   "license": "MIT",
   "files": [
