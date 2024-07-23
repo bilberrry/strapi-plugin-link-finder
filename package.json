@@ -1,6 +1,6 @@
 {
   "name": "@bilberrry/strapi-plugin-link-finder",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A custom field for Strapi, allowing you find URLs.",
   "repository": {
     "type": "git",
