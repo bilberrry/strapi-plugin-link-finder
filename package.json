@@ -76,9 +76,6 @@
     "lint": "eslint \"**/*.{js,ts}\"",
     "lint:fix": "yarn lint --fix"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "license": "MIT",
   "files": [
     "admin",
