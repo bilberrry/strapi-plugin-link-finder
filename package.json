@@ -70,6 +70,10 @@
     "node": ">=18.0.0 <=20.x.x",
     "npm": ">=6.0.0"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "scripts": {
     "develop": "tsc -p tsconfig.server.json -w",
     "build": "tsc -p tsconfig.server.json",
