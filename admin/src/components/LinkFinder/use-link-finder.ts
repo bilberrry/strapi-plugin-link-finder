@@ -1,5 +1,5 @@
 import { unstable_useContentManagerContext as useContentManagerContext, useAuth } from '@strapi/strapi/admin';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, ChangeEvent } from 'react';
 
 // eslint-disable-next-line no-restricted-imports
 import axios from '../../utils/axios';
@@ -65,26 +65,22 @@ export const useLinkFinder = ({ name }: LinkFinderProps) => {
       setSelectTextValue('');
 
       if (onChange && config?.form?.titleField) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         onChange({
           target: {
             name: name.split('.').slice(0, -1).join('.') + '.' + config?.form?.titleField,
             value: (option.entry.title || '').trim() || null,
             type: 'text',
           },
-        });
+        } as ChangeEvent<HTMLInputElement>);
       }
       if (onChange && config?.form?.urlField) {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         onChange({
           target: {
             name: name.split('.').slice(0, -1).join('.') + '.' + config?.form?.urlField,
             value: (option.entry.url || '').trim() || null,
             type: 'text',
           },
-        });
+        } as ChangeEvent<HTMLInputElement>);
       }
     }
   };

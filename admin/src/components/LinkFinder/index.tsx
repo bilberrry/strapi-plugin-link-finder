@@ -1,4 +1,4 @@
-import { Box, Combobox, ComboboxOption, Field, Stack } from '@strapi/design-system';
+import { Combobox, ComboboxOption, Field } from '@strapi/design-system';
 import { forwardRef } from 'react';
 import { useIntl } from 'react-intl';
 
@@ -14,34 +14,32 @@ const LinkFinder = forwardRef<HTMLButtonElement, LinkFinderProps>((props) => {
     useLinkFinder(props);
 
   return (
-    <Box>
-      <Field id={name} name={name} hint={description && formatMessage(description)}>
-        <Stack spacing={1}>
-          <Combobox
-            aria-label={'select-title-url'}
-            placeholder={'Start typing to find a page'}
-            autocomplete={{ type: 'list', filter: 'contains' }}
-            onChange={handleSelectOptionChange}
-            disabled={disabled}
-            textValue={selectTextValue}
-            value={''}
-            onInputChange={handleSelectInputChange}
-            onClear={handleSelectClear}
-          >
-            {(options || []).map((option) => (
-              <ComboboxOption key={option.value} value={option.value}>
-                {option.label}
-              </ComboboxOption>
-            ))}
-            {(options || []).length === 0 && (
-              <ComboboxOption disabled value={'no-results-found'}>
-                {'No results found'}
-              </ComboboxOption>
-            )}
-          </Combobox>
-        </Stack>
-      </Field>
-    </Box>
+    <Field.Root id={name} name={name} hint={description && formatMessage(description)}>
+      <Combobox
+        aria-label={'select-title-url'}
+        placeholder={'Start typing to find a page'}
+        autocomplete={{ type: 'list', filter: 'contains' }}
+        onChange={handleSelectOptionChange}
+        disabled={disabled}
+        textValue={selectTextValue}
+        value={''}
+        onInputChange={handleSelectInputChange}
+        onClear={handleSelectClear}
+      >
+        {(options || []).map((option) => (
+          <ComboboxOption key={option.value} value={option.value}>
+            {option.label}
+          </ComboboxOption>
+        ))}
+        {(options || []).length === 0 && (
+          <ComboboxOption disabled value={'no-results-found'}>
+            {'No results found'}
+          </ComboboxOption>
+        )}
+      </Combobox>
+      <Field.Error />
+      <Field.Hint />
+    </Field.Root>
   );
 });
 
