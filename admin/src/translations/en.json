@@ -1,4 +1,4 @@
 {
-  "link-finder.label": "Link Finder",
-  "link-finder.description": "Find the URL of a page"
+  "label": "Link Finder",
+  "description": "Find the URL of a page"
 }

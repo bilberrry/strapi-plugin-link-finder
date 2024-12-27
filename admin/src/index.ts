@@ -1,11 +1,10 @@
-import { prefixPluginTranslations } from '@strapi/helper-plugin';
-
 /* eslint-disable no-restricted-imports */
 import pluginPkg from '../../package.json';
 import Initializer from './components/Initializer';
 import LinkFinderIcon from './components/LinkFinderIcon';
 import pluginId from './pluginId';
 import getTrad from './utils/getTrad';
+import { prefixPluginTranslations } from './utils/prefixPluginTranslations';
 
 const name = pluginPkg.strapi.displayName;
 
@@ -16,11 +15,11 @@ export default {
       pluginId,
       type: 'json',
       intlLabel: {
-        id: getTrad('link-finder.label'),
+        id: getTrad('label'),
         defaultMessage: 'Link',
       },
       intlDescription: {
-        id: getTrad('link-finder.description'),
+        id: getTrad('description'),
         defaultMessage: 'Find a link to an existing entry.',
       },
       icon: LinkFinderIcon,
@@ -81,7 +80,7 @@ export default {
     const { locales } = app;
 
     const importedTrads = await Promise.all(
-      (locales as any[]).map((locale) => {
+      (locales as string[]).map((locale) => {
         return import(`./translations/${locale}.json`)
           .then(({ default: data }) => {
             return {
@@ -98,6 +97,6 @@ export default {
       }),
     );
 
-    return Promise.resolve(importedTrads);
+    return importedTrads;
   },
 };

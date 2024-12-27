@@ -1,6 +1,6 @@
-import { Strapi } from '@strapi/strapi';
+import type { Core } from '@strapi/strapi';
 
-export default ({ strapi }: { strapi: Strapi }) => {
+export default ({ strapi }: { strapi: Core.Strapi }) => {
   strapi.customFields.register({
     name: 'link-picker',
     plugin: 'link-finder',

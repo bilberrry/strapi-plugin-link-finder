@@ -1,6 +1,6 @@
-import { Strapi } from '@strapi/strapi';
+import type { Core } from '@strapi/strapi';
 
-export default ({ strapi }: { strapi: Strapi }) => ({
+export default ({ strapi }: { strapi: Core.Strapi }) => ({
   async find(ctx: any) {
     const res = await strapi.plugin('link-finder')?.service('finder')?.find(ctx.request.query?.q);
     ctx.body = res || [];

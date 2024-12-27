@@ -1,19 +1,29 @@
-import { useCMEditViewDataManager } from '@strapi/helper-plugin';
+import { unstable_useContentManagerContext as useContentManagerContext, useAuth } from '@strapi/strapi/admin';
 import { useEffect, useState } from 'react';
 
 // eslint-disable-next-line no-restricted-imports
 import axios from '../../utils/axios';
 import { ConfigResponse, ConfigType, FindResponse, LinkFinderProps, OptionType } from './types';
 import { findResponseToOptions } from './utils';
+// eslint-disable-next-line no-restricted-imports
+import pluginId from '../../pluginId';
 
 export const useLinkFinder = ({ name }: LinkFinderProps) => {
   const [config, setConfig] = useState<ConfigType | null>(null);
   const [options, setOptions] = useState<OptionType[]>([]);
   const [selectTextValue, setSelectTextValue] = useState('');
-  const { onChange: onEditViewDataChange } = useCMEditViewDataManager();
+  const token = useAuth(pluginId, (state) => state.token);
+
+  const {
+    form: { onChange },
+  } = useContentManagerContext();
 
   useEffect(() => {
-    axios<any, ConfigResponse>('/config').then((res) => {
+    axios<any, ConfigResponse>('/config', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
       if (res?.data?.config) {
         setConfig(res?.data?.config);
       }
@@ -30,7 +40,12 @@ export const useLinkFinder = ({ name }: LinkFinderProps) => {
 
     if (selectTextValue.trim().length > 2) {
       timeout = setTimeout(() => {
-        axios<any, FindResponse>('/find', { params: { q: selectTextValue } }).then((res) => {
+        axios<any, FindResponse>('/find', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          params: { q: selectTextValue },
+        }).then((res) => {
           setOptions(findResponseToOptions(res));
         });
       }, 500);
@@ -49,8 +64,10 @@ export const useLinkFinder = ({ name }: LinkFinderProps) => {
     if (option) {
       setSelectTextValue('');
 
-      if (onEditViewDataChange && config?.form?.titleField) {
-        onEditViewDataChange({
+      if (onChange && config?.form?.titleField) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        onChange({
           target: {
             name: name.split('.').slice(0, -1).join('.') + '.' + config?.form?.titleField,
             value: (option.entry.title || '').trim() || null,
@@ -58,8 +75,10 @@ export const useLinkFinder = ({ name }: LinkFinderProps) => {
           },
         });
       }
-      if (onEditViewDataChange && config?.form?.urlField) {
-        onEditViewDataChange({
+      if (onChange && config?.form?.urlField) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        onChange({
           target: {
             name: name.split('.').slice(0, -1).join('.') + '.' + config?.form?.urlField,
             value: (option.entry.url || '').trim() || null,
