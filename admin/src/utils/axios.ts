@@ -4,7 +4,7 @@ import axios, { AxiosInstance } from 'axios';
 import pluginId from '../pluginId';
 
 const instance: AxiosInstance = axios.create({
-  baseURL: `${process.env.STRAPI_ADMIN_BACKEND_URL}/${pluginId}`,
+  baseURL: `/${pluginId}`,
   headers: {
     'Content-Type': 'application/json',
   },
